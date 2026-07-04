@@ -25,6 +25,5 @@ jobs:
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           HORIZON_MONTHS: "6"
-          TEST_PING: "1"
 
         run: python msf_watch.py
