@@ -24,6 +24,6 @@ jobs:
       - name: Check for open seats
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          HORIZON_MONTHS: "6"
+          HORIZON_MONTHS: "4"
 
         run: python msf_watch.py
