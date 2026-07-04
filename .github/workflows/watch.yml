@@ -1,7 +1,7 @@
 name: MSF course watch
 on:
   schedule:
-    - cron: "*/15 * * * *"   # every 15 min (UTC). Adjust as you like.
+    - cron: "*/10 * * * *"   # every 15 min (UTC). Adjust as you like.
   workflow_dispatch: {}        # lets you run it manually from the Actions tab
 
 jobs:
