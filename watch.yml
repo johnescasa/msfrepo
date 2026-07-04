@@ -1,0 +1,28 @@
+name: MSF course watch
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 min (UTC). Adjust as you like.
+  workflow_dispatch: {}        # lets you run it manually from the Actions tab
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests beautifulsoup4
+
+      # Persist the "already alerted" state between runs so you don't get spammed.
+      - uses: actions/cache@v4
+        with:
+          path: msf_state.json
+          key: msf-state-${{ github.run_id }}
+          restore-keys: msf-state-
+
+      - name: Check for open seats
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          HORIZON_MONTHS: "3"
+        run: python msf_watch.py
